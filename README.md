@@ -1,44 +1,63 @@
-# PollingAPI
-API for Polling Questions - Coding Ninjas Backend Skill Test Project
+# Polling API
 
-Task: Need to create an API where anyone can create questions with options and also add votes to it
-
----
+This API allows users to create and manage polls. It does not require authentication and is completely open for public use. Users can create questions, add options to questions, and add votes to the options.
 
 ## Features
-- Create a question
-- Add options to a question
-- Add a vote to an option of question
-- Delete a question → (optional: A question can’t be deleted if one of it’s options has votes)
-- Delete an option → (optional: An option can’t be deleted if it has even one vote given to it)
-- View a question with it’s options and all the votes given to it
+
+- **Create a question:** Users can create multiple questions for polling.
+- **Add options to a question:** For each question, users can add multiple options to choose from.
+- **Add a vote to an option of a question:** Users can cast votes for the available options of a question.
+- **Delete a question:** (Optional) A question can only be deleted if none of its options has received any votes.
+- **Delete an option:** (Optional) An option can only be deleted if it has not received any votes.
+- **View a question with its options and all the votes given to it.**
 
 ## Required Routes
-- /questions/create (To create a question)
-- /questions/:id/options/create (To add options to a specific question)
-- /questions/:id/delete (To delete a question)
-- /options/:id/delete (To delete an option)
-- /options/:id/add_vote (To increment the count of votes)
-- /questions/:id (To view a question and it’s options)
 
-## Folder Structure
-```
-CSV_Upload/
-|── |config/
-│   |      ├── mongoose.js
-|   |
-├── routes/
-│   |      ├── api/
-│   ├── index.js
-|   |
-├── controllers/
-│   ├── OptionsController.js
-│   ├── QuestionsController.js
-|   |
-├── models/
-│   ├── options.js
-│   ├── questions.js
-|   |
-├── package-lock.json
-├── package.json
-├── README.md
+1. **Create a Question**
+
+   ```
+   POST /questions/create
+   ```
+
+   Creates a new question for polling. The request should include the question text.
+
+2. **Add Options to a Specific Question**
+
+   ```
+   POST /questions/:id/options/create
+   ```
+
+   Adds options to a specific question identified by `:id`. The request should include the option text.
+
+3. **Delete a Question**
+
+   ```
+   DELETE /questions/:id/delete
+   ```
+
+   Deletes a specific question identified by `:id`. (Optional: Only allowed if none of its options have received any votes).
+
+4. **Delete an Option**
+
+   ```
+   DELETE /options/:id/delete
+   ```
+
+   Deletes a specific option identified by `:id`. (Optional: Only allowed if the option has not received any votes).
+
+5. **Add a Vote to an Option**
+
+   ```
+   POST /options/:id/add_vote
+   ```
+
+   Increments the vote count for a specific option identified by `:id`.
+
+6. **View a Question and its Options**
+
+   ```
+   GET /questions/:id
+   ```
+
+   Displays the details of a specific question identified by `:id`, including its options and all the votes given to each option.
+
